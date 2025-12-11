@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NextGen Accessibility Theme Preview — Dark/Light</title>
+<style>
+  /* Theme variables (light defaults) */
+  :root{
+    --bg: #f7f9fc;
+    --wrap-bg: #ffffff;
+    --text: #111827;
+    --muted: #64748b;
+    --card-bg: #ffffff;
+    --hero-bg: #0B2545;
+    --hero-overlay: rgba(11,37,69,0.45);
+    --color-cta-bg: #007A3D;
+    --color-cta-dark: #006644;
+    --color-accent: #00788A;
+    --color-brand-purple: #5B2C6F;
+    --color-white: #ffffff;
+    --focus-ring: 4px solid rgba(0,122,61,0.18);
+    --radius: 8px;
+    --max-width: 1000px;
+    --container-pad: 24px;
+    --link: #0B56A6;
+    --shadow: 0 6px 30px rgba(11,37,69,0.06);
+  }
+
+  /* Dark theme overrides */
+  [data-theme="dark"]{
+    --bg: #0f172a;
+    --wrap-bg: #0b1220;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --card-bg: #0f2133;
+    --hero-bg: #07172b;
+    --hero-overlay: rgba(2,8,23,0.55);
+    --color-cta-bg: #009b55;
+    --color-cta-dark: #00834c;
+    --color-accent: #0098b0;
+    --color-brand-purple: #8f4ac8;
+    --color-white: #e6eef6;
+    --link: #6fb0ff;
+    --shadow: 0 8px 30px rgba(2,6,23,0.6);
+  }
+
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+  body{background:var(--bg);color:var(--text);line-height:1.45;padding:28px;display:flex;justify-content:center;transition:background .25s ease,color .25s ease}
+  .wrap{width:100%;max-width:var(--max-width);background:var(--wrap-bg);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+  header{background:linear-gradient(180deg,var(--hero-bg),#2b3a6b);color:var(--color-white);padding:48px 24px;position:relative;transition:background .25s ease}
+  header::after{content:"";position:absolute;inset:0;background:var(--hero-overlay);pointer-events:none;transition:background .25s ease}
+  .hero{position:relative;z-index:1;max-width:900px;margin:0 auto;display:flex;gap:24px;align-items:center;}
+  .hero .left{flex:1}
+  .hero h1{margin:0;font-size:44px;line-height:1.02;font-weight:700;color:var(--color-white)}
+  .hero p{margin:14px 0 0 0;max-width:60ch;font-size:18px;opacity:0.95;color:var(--color-white)}
+  .hero .cta-row{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 18px;border-radius:var(--radius);font-weight:600;text-decoration:none;cursor:pointer;border:none}
+  .btn-primary{background:var(--color-cta-bg);color:var(--color-white)}
+  .btn-primary:focus{outline:var(--focus-ring)}
+  .btn-outline{background:transparent;color:var(--color-white);border:2px solid rgba(255,255,255,0.9)}
+  .hero-illus{width:220px;flex-shrink:0;transform:translateY(6px);opacity:0.95}
+
+  main{padding:28px var(--container-pad);display:grid;grid-template-columns:1fr 380px;gap:28px}
+  section.card{background:var(--card-bg);padding:20px;border-radius:10px;box-shadow:0 4px 14px rgba(11,37,69,0.04);transition:background .25s ease}
+  h2{margin-top:0;color:var(--text)}
+  .palette{display:flex;flex-wrap:wrap;gap:12px}
+  .swatch{width:160px;border-radius:8px;overflow:hidden;box-shadow:0 3px 10px rgba(11,37,69,0.06);border:1px solid rgba(0,0,0,0.04);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.02))}
+  .swatch .color{height:72px}
+  .swatch .meta{padding:10px;font-size:13px;background:transparent;color:var(--text)}
+  .meta code{display:block;color:var(--muted);font-weight:700}
+
+  .samples{display:flex;flex-direction:column;gap:14px}
+  .samples .row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .link-sample a{color:var(--link);text-decoration:underline;font-weight:600}
+  .badge{display:inline-block;padding:6px 10px;border-radius:999px;background:var(--color-accent);color:var(--color-white);font-weight:700}
+
+  /* Theme toggle button */
+  .theme-toggle{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    background:var(--color-cta-bg);
+    color:var(--color-white);
+    border:none;
+    padding:12px 14px;
+    border-radius:999px;
+    cursor:pointer;
+    font-weight:700;
+    box-shadow:0 6px 18px rgba(2,6,23,0.18);
+    transition:transform .15s ease, background .2s ease;
+  }
+  .theme-toggle:active{transform:scale(.98)}
+  .theme-toggle:focus{outline:4px solid rgba(255,255,255,0.14);outline-offset:4px}
+
+  /* small viewport tweaks */
+  @media (max-width:880px){
+    main{grid-template-columns:1fr; padding:20px}
+    .hero{flex-direction:column;align-items:flex-start}
+    .hero-illus{width:160px}
+  }
+
+  /* Utility */
+  hr.sep{border:none;border-top:1px solid rgba(0,0,0,0.06);margin:18px 0}
+  [data-theme="dark"] hr.sep{border-top:1px solid rgba(255,255,255,0.04)}
+</style>
+</head>
+<body>
+  <div class="wrap" role="main">
+    <header aria-label="Accessibility theme hero">
+      <div class="hero">
+        <div class="left">
+          <h1>NextGen — Accessibility Theme Preview</h1>
+          <p>Theme tuned for WCAG 2.1 AA. This preview shows headings, controls, link styles, badges, and color swatches you can apply across your site.</p>
+          <div class="cta-row" role="group" aria-label="Call to action buttons">
+            <a class="btn btn-primary" href="#try" role="button">Get Started</a>
+            <a class="btn btn-outline" href="#learn" role="button">Learn More</a>
+          </div>
+        </div>
+        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='140'><rect fill='%23ffffff' width='220' height='140' rx='14'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%235B2C6F' font-size='14' font-family='Arial'>Illustration</text></svg>" alt="" aria-hidden="true" class="hero-illus" />
+      </div>
+    </header>
+
+    <main>
+      <section class="card" aria-labelledby="colors-heading">
+        <h2 id="colors-heading">Color Palette & Swatches</h2>
+        <p>Below are the theme colours with hex values. Use the CSS variables in your stylesheet.</p>
+        <div class="palette" aria-hidden="false">
+          <div class="swatch" title="#0B2545">
+            <div class="color" style="background:#0B2545"></div>
+            <div class="meta"><strong>Hero / Dark BG</strong><code>#0B2545</code><small>White on this = ~15:1</small></div>
+          </div>
+          <div class="swatch" title="#111827">
+            <div class="color" style="background:#111827"></div>
+            <div class="meta"><strong>Primary text</strong><code>#111827</code><small>Dark on white = ~18:1</small></div>
+          </div>
+          <div class="swatch" title="#007A3D">
+            <div class="color" style="background:#007A3D"></div>
+            <div class="meta"><strong>Primary CTA</strong><code>#007A3D</code><small>White on this = ~5.45:1</small></div>
+          </div>
+          <div class="swatch" title="#006644">
+            <div class="color" style="background:#006644"></div>
+            <div class="meta"><strong>Dark CTA</strong><code>#006644</code><small>White on this = ~7:1</small></div>
+          </div>
+          <div class="swatch" title="#00788A">
+            <div class="color" style="background:#00788A"></div>
+            <div class="meta"><strong>Accent / Teal</strong><code>#00788A</code><small>White on this = ~5.2:1</small></div>
+          </div>
+          <div class="swatch" title="#5B2C6F">
+            <div class="color" style="background:#5B2C6F"></div>
+            <div class="meta"><strong>Brand Purple</strong><code>#5B2C6F</code><small>Use for decorative elements</small></div>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <h3>Sample text & controls</h3>
+        <div class="samples" id="try">
+          <div>
+            <h1 style="font-size:32px;margin:0;color:var(--text)">Heading H1 — 44px Bold</h1>
+            <h2 style="font-size:24px;margin:6px 0 0 0;color:var(--text)">Heading H2 — 28px</h2>
+            <h3 style="font-size:18px;margin:6px 0 0 0;color:var(--text)">Heading H3 — 20px</h3>
+            <p style="margin-top:8px;color:var(--muted)">Body copy example — Keep line length readable and font size sufficient. Use strong colour contrast for body text.</p>
+          </div>
+
+          <div class="row">
+            <button class="btn btn-primary" onclick="alert('Primary CTA')">Primary Button</button>
+            <button class="btn" style="background:var(--color-cta-dark);color:var(--color-white);border-radius:var(--radius)" onkeydown="void(0)">Dark CTA</button>
+            <a class="btn" style="background:var(--color-accent);color:var(--color-white);border-radius:var(--radius);text-decoration:none" href="#badge">Accent Button</a>
+            <a class="btn" style="background:var(--card-bg);color:var(--text);border:2px solid rgba(0,0,0,0.06);border-radius:var(--radius)" href="#outline">Light Button</a>
+          </div>
+
+          <div class="row" style="margin-top:6px">
+            <span class="badge" id="badge">Accessible Badge</span>
+            <span style="font-size:13px;color:var(--muted);margin-left:8px">Meta label example</span>
+          </div>
+
+          <div class="row link-sample" style="margin-top:8px">
+            <a href="#learn">This is a sample link — descriptive and clear</a>
+          </div>
+
+        </div>
+      </section>
+
+      <aside class="card" aria-labelledby="checks-heading">
+        <h2 id="checks-heading">Quick accessibility checks</h2>
+        <ol>
+          <li>Ensure hero text is overlaid when using gradients.</li>
+          <li>All primary CTAs have contrast ≥ 4.5:1 against their background.</li>
+          <li>Keyboard focus visible (try tabbing) — primary has custom focus.</li>
+          <li>Images have alt text or are marked aria-hidden when decorative.</li>
+          <li>Use semantic headings and landmarks (header, main, aside).</li>
+        </ol>
+
+        <h3 style="margin-top:14px">Authoring tips</h3>
+        <ul>
+          <li>Write concise link text (avoid "click here").</li>
+          <li>Provide captions/alt text for investor documents and PDFs.</li>
+          <li>Maintain consistent focus order in interactive flows (forms).</li>
+          <li>Offer a visible high-contrast toggle for users who need stronger contrast.</li>
+        </ul>
+
+        <hr class="sep">
+
+        <h3>Test tools</h3>
+        <p style="font-size:13px;color:var(--muted)">axe-core, Lighthouse, pa11y, NVDA, VoiceOver, Contrast checkers, PAC 3 (PDFs).</p>
+      </aside>
+    </main>
+  </div>
+
+  <button class="theme-toggle" id="themeBtn" aria-pressed="false" aria-label="Toggle dark mode">🌙</button>
+
+<script>
+  (function(){
+    const btn = document.getElementById("themeBtn");
+    const root = document.documentElement;
+    const preferDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    // Initialize theme from localStorage or OS preference
+    const saved = localStorage.getItem('theme');
+    const initial = saved || (preferDark ? 'dark' : 'light');
+    if(initial === 'dark'){
+      root.setAttribute('data-theme','dark');
+      btn.textContent = '☀️';
+      btn.setAttribute('aria-pressed','true');
+    } else {
+      root.setAttribute('data-theme','light');
+      btn.textContent = '🌙';
+      btn.setAttribute('aria-pressed','false');
+    }
+
+    // Toggle handler
+    btn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      if(current === 'dark'){
+        root.setAttribute('data-theme','light');
+        btn.textContent = '🌙';
+        btn.setAttribute('aria-pressed','false');
+        localStorage.setItem('theme','light');
+      } else {
+        root.setAttribute('data-theme','dark');
+        btn.textContent = '☀️';
+        btn.setAttribute('aria-pressed','true');
+        localStorage.setItem('theme','dark');
+      }
+    });
+
+    // Keyboard accessibility: Enter/Space activates
+    btn.addEventListener('keyup', (e) => {
+      if(e.key === 'Enter' || e.key === ' ') btn.click();
+    });
+  })();
+</script>
+</body>
+</html>
