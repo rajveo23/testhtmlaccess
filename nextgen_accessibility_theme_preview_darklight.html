@@ -1,57 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SEBI Registered – WCAG Safe</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>NextGen – RTA</title>
+
 <style>
+  :root {
+    /* Background */
+    --hero-bg-start: #4338CA;
+    --hero-bg-end:   #4F46E5;
+
+    /* Text hierarchy */
+    --heading-primary: #F1F5FF; /* soft white */
+    --heading-strong:  #FFFFFF; /* pure white */
+    --text-body:       #E0E7FF;
+
+    /* Accent */
+    --accent-green: #22C55E;
+    --button-green: #16A34A;
+    --button-outline: #E0E7FF;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     margin: 0;
-    font-family: system-ui, sans-serif;
-    background: linear-gradient(135deg, #4338CA, #4F46E5);
-    color: #fff;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, var(--hero-bg-start), var(--hero-bg-end));
+    color: var(--text-body);
     min-height: 100vh;
-    display: flex;
+  }
+
+  .hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 72px 32px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
     align-items: center;
-    justify-content: center;
   }
 
-  .wrap {
-    padding: 40px;
-  }
-
-  h1 {
-    font-size: 44px;
+  /* Headings */
+  .hero-title {
+    font-size: 56px;
+    line-height: 1.1;
+    margin: 0 0 12px;
     font-weight: 800;
+    color: var(--heading-primary);
   }
 
-  .sebi {
-    font-size: 36px;
+  .hero-sebi {
+    font-size: 40px;
     font-weight: 800;
-    color: #ffffff;
+    color: var(--heading-strong);
     display: inline-block;
     position: relative;
   }
 
-  .sebi::after {
+  .hero-sebi::after {
     content: "";
     display: block;
+    width: 72px;
     height: 4px;
-    width: 60%;
-    background: #22C55E; /* accent only */
-    margin-top: 6px;
+    margin-top: 8px;
+    background: var(--accent-green);
+    border-radius: 2px;
   }
 
-  .note {
-    margin-top: 8px;
-    opacity: 0.85;
+  .hero-desc {
+    margin-top: 20px;
+    max-width: 520px;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-body);
+  }
+
+  /* Buttons */
+  .hero-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 16px;
+  }
+
+  .btn-primary {
+    background: var(--button-green);
+    color: #FFFFFF;
+    border: none;
+    padding: 14px 22px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--heading-strong);
+    border: 2px solid var(--button-outline);
+    padding: 12px 22px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  /* Stats */
+  .stats {
+    margin-top: 44px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .stat strong {
+    font-size: 24px;
+    color: var(--heading-strong);
+  }
+
+  .stat span {
+    font-size: 14px;
+    color: var(--text-body);
+  }
+
+  /* Right illustration placeholder */
+  .hero-visual {
+    height: 420px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--heading-primary);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+
+    .hero-title {
+      font-size: 44px;
+    }
+
+    .hero-sebi {
+      font-size: 32px;
+    }
+
+    .stats {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 </style>
 </head>
+
 <body>
-  <div class="wrap">
-    <h1>NextGen – RTA</h1>
-    <div class="sebi">SEBI Registered</div>
-    <div class="note">WCAG 2.1 AA compliant on current background</div>
+
+<section class="hero">
+  <div>
+    <h1 class="hero-title">NextGen – RTA</h1>
+
+    <div class="hero-sebi">SEBI Registered</div>
+
+    <p class="hero-desc">
+      Premier Registrar & Share Transfer Agent for Demat & ISIN services.
+      Specializing in ISIN generation, dematerialization, corporate actions,
+      and e-voting with 27+ years of experience.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn-primary">Get Started</button>
+      <button class="btn-secondary">Learn More</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <strong>27+</strong>
+        <span>Years Experience</span>
+      </div>
+      <div class="stat">
+        <strong>1500+</strong>
+        <span>Clients Served</span>
+      </div>
+      <div class="stat">
+        <strong>99%</strong>
+        <span>Accuracy Rate</span>
+      </div>
+      <div class="stat">
+        <strong>24/7</strong>
+        <span>Support Available</span>
+      </div>
+    </div>
   </div>
+
+  <div class="hero-visual">
+    Illustration / Dashboard Graphic
+  </div>
+</section>
+
 </body>
 </html>
