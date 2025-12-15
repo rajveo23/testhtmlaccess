@@ -2,71 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SEBI Registered Colour Test</title>
+<title>SEBI Registered – WCAG Safe</title>
 <style>
   body {
     margin: 0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-family: system-ui, sans-serif;
     background: linear-gradient(135deg, #4338CA, #4F46E5);
-    color: #ffffff;
+    color: #fff;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .wrapper {
-    max-width: 900px;
+  .wrap {
     padding: 40px;
   }
 
   h1 {
     font-size: 44px;
-    margin-bottom: 10px;
     font-weight: 800;
   }
 
-  .option {
+  .sebi {
     font-size: 36px;
-    font-weight: 700;
-    margin: 24px 0 8px;
+    font-weight: 800;
+    color: #ffffff;
+    display: inline-block;
+    position: relative;
+  }
+
+  .sebi::after {
+    content: "";
+    display: block;
+    height: 4px;
+    width: 60%;
+    background: #22C55E; /* accent only */
+    margin-top: 6px;
   }
 
   .note {
+    margin-top: 8px;
     opacity: 0.85;
-    font-size: 16px;
-  }
-
-  /* Colour options */
-  .teal { color: #2ED3B7; }
-  .emerald { color: #34D399; }
-  .gold { color: #FACC15; }
-  .white { color: #FFFFFF; }
-
-  .underline {
-    text-decoration: underline;
-    text-decoration-color: #22C55E;
-    text-underline-offset: 6px;
   }
 </style>
 </head>
 <body>
-
-  <div class="wrapper">
+  <div class="wrap">
     <h1>NextGen – RTA</h1>
-
-    <div class="option teal">SEBI Registered</div>
-    <div class="note">Option 1: Professional Teal (Recommended)</div>
-
-    <div class="option emerald">SEBI Registered</div>
-    <div class="note">Option 2: Bright Emerald Green</div>
-
-    <div class="option gold">SEBI Registered</div>
-    <div class="note">Option 3: Premium Gold / Authority Highlight</div>
-
-    <div class="option white underline">SEBI Registered</div>
-    <div class="note">Option 4: White text with green underline accent</div>
+    <div class="sebi">SEBI Registered</div>
+    <div class="note">WCAG 2.1 AA compliant on current background</div>
   </div>
-
 </body>
 </html>
